@@ -1,6 +1,5 @@
 window.onload = () => {
-  
-};// 1. Obtener elementos del DOM
+// 1. Obtener elementos del DOM
 const inputBusqueda = document.getElementById('buscadorGifs');
 const btnBuscar = document.getElementById('btnBuscar');
 const contenedorGifs = document.getElementById('contenedorGifs');
@@ -10,7 +9,10 @@ const apiKey = 'zUuCpwjDZasq0o4Zu2pgsNUNxskFNjKq';
 // 2. Función para mostrar GIFs
 function mostrarGifs(data) {
   contenedorGifs.innerHTML = ''; // Limpiar resultados anteriores
-
+  if (data.data.length === 0) {
+    contenedorGifs.innerHTML = `<p class="no-results">No se encontraron GIFs para la búsqueda.</p>`;
+    return;
+  }
   data.data.forEach(gif => {
     // Crear elementos HTML
     const gifContainer = document.createElement('div');
@@ -51,3 +53,4 @@ btnBuscar.addEventListener('click', async () => {
     contenedorGifs.innerHTML = `<p class="error">Error al cargar GIFs: ${error.message}</p>`;
   }
 });
+};
